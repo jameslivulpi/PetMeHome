@@ -13,7 +13,7 @@ import FirebaseFirestoreSwift
 
 
 
-struct Pet: Identifiable, Codable {
+struct Pet: Identifiable, Codable, Hashable {
     var id: String
     var name: String
     var color: String

@@ -21,22 +21,47 @@ struct ListPetsView: View {
     @StateObject var petModel = PetModel()
     @State var annotation = MKPointAnnotation()
     @State private var showingMap = false
+    @StateObject var locationManager = LocationManager()
     
     
     
     var body: some View {
-        ZStack{
-            List(petModel.pets) { pet in //loop over all pets in structure
-                let newAnnotation = [location(name: pet.name, coordinate: CLLocationCoordinate2D(latitude: pet.latitude, longitude: pet.longitude))]
-
-    
-                Section{
-                    Text(pet.name).font(.title)
+        VStack{
+            Section{
+            //ForEach(self.petModel.pets) {pet in
+                Map(coordinateRegion: $locationManager.region,interactionModes: MapInteractionModes.all, annotationItems: self.petModel.annotations){
+                    MapAnnotation(coordinate: $0.coordinate){
+                        Image(systemName: "person")
+                            .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 100, height: 25)
+                                        .clipShape(Circle())
+                                        .overlay(
+                                            Circle().stroke(Color.blue, lineWidth: 25/10))
+                                        .shadow(radius: 10)
                     
-                    VStack{
+                    }
+                }
+                
+           // }
+            }
+            ZStack{
+               
+            
+                ScrollView{
+                    
+                    ForEach(self.petModel.pets) {pet in
+                  
                         
+                   // List(petModel.pets) { pet in //loop over all pets in structure
+                        
+                      //  let newAnnotation = [location(name: pet.name, coordinate: CLLocationCoordinate2D(latitude: pet.latitude, longitude: pet.longitude))]
+                        Section{
+                        
+                        Text(pet.name).font(.title)
+                  
                         FirebaseImage(id: pet.path)
-                 
+                    
                         
                         Text(pet.species == 0 ? "Pet Type: Dog" : "Pet Type: Cat")
                             // .padding()
@@ -65,61 +90,35 @@ struct ListPetsView: View {
                             .cornerRadius(20)
                             .padding(.horizontal)
                             }
-                            
-                            
                         }
-                        
-                        
-                        
                         }
-                    
-                    
-                    
+         
+                       // .sheet(isPresented: $showingMap){
+                            
+                   
+                        //}
                         
-                }
+                        
             
                 
-
-                .sheet(isPresented: $showingMap){
-                    
-                    Map(coordinateRegion: .constant(MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: pet.latitude, longitude: pet.longitude), span: MKCoordinateSpan(latitudeDelta: 0.2   , longitudeDelta: 0.2))), annotationItems: newAnnotation){
-                        MapMarker(coordinate: $0.coordinate, tint: Color.purple)
-                        
                     }
                     
                     
-                    
-                    //.frame(width: 300, height: 200)
-                   .padding()
+        }
+                .onAppear{
                 
+                    petModel.listPets()
                 }
                 
-            
-                
-               
                     
             }
-            .environmentObject(petModel)
            
         
-           
+                
             
+}
+       
         
-                    
-
-            
-        //.navigationBarTitle("Pets")
-        
-    }
-        
-        .onAppear{
-        
-            petModel.listPets()
-        }
-        
-        
-        
- 
         
     
     }

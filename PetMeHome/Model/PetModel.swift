@@ -14,16 +14,17 @@ import GeoFire
 import FirebaseCore
 import FirebaseFirestore
 
-struct location: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
+struct Location: Identifiable {
+    var id = UUID()
+    var name: String
+    var coordinate: CLLocationCoordinate2D
 }
 
 
 class PetModel: ObservableObject {
     @Published var pet: Pet
     @Published var pets = [Pet]()
+    @Published var annotations = [Location]()
     @Published var specieslist = ["Dog", "Cat"]
     
     var locationManager = LocationManager()
@@ -47,7 +48,9 @@ class PetModel: ObservableObject {
     }
     
     func listPets(){
-        db.collection("users").getDocuments(){ (querySnapshot, error) in
+        
+  
+        db.collection("users").addSnapshotListener{ (querySnapshot, error) in
             guard let documents = querySnapshot?.documents else{
                 print("No Pets!")
                 return
@@ -65,6 +68,9 @@ class PetModel: ObservableObject {
                 let latitude = data["latitude"] as? Double ?? -1.0
                 let longitude = data["longitude"] as? Double ?? -1.0
                 let hash = data["hash"] as? String ?? ""
+                    // let newAnnotation = [Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))]
+                self.annotations.append(Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
+                
             
             
                // self.geoQuery()
