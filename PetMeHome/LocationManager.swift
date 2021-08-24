@@ -1,59 +1,46 @@
-import Foundation
-import CoreLocation
-import Combine
-import MapKit
 
-class LocationManager: NSObject,CLLocationManagerDelegate, ObservableObject {
+import MapKit
+import CoreLocation
+import SwiftUI
+
+final class LocationManager: NSObject, ObservableObject {
+
+    @Published var location: CLLocation?
+    @Published var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(latitude: 38.898150, longitude: -77.034340),
+        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+    )
+    private var hasSetRegion = false
     
     private let locationManager = CLLocationManager()
-    @Published var locationStatus: CLAuthorizationStatus?
-    @Published var lastLocation: CLLocation?
-    @Published var region = MKCoordinateRegion()
-
+    
     override init() {
         super.init()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.startUpdatingLocation()
-    }
-
-   
-    
-    var statusString: String {
-        guard let status = locationStatus else {
-            return "unknown"
-        }
         
-        switch status {
-        case .notDetermined: return "notDetermined"
-        case .authorizedWhenInUse: return "authorizedWhenInUse"
-        case .authorizedAlways: return "authorizedAlways"
-        case .restricted: return "restricted"
-        case .denied: return "denied"
-        default: return "unknown"
-        }
+        self.locationManager.delegate = self
+        
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.distanceFilter = kCLDistanceFilterNone
+        self.locationManager.requestWhenInUseAuthorization()
+        self.locationManager.startUpdatingLocation()
     }
+}
 
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        locationStatus = status
-        print(#function, statusString)
-    }
-
-    
+extension LocationManager: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.last {
+            self.location = location
         
-            locations.last.map {
-                region = MKCoordinateRegion(
-                    center: CLLocationCoordinate2D(latitude: $0.coordinate.latitude, longitude: $0.coordinate.longitude),
-                    span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
-                    
-                    
-                )
-     
-                
-                
+            
+
+            
+            
+            if !hasSetRegion {
+                self.region = MKCoordinateRegion(center: location.coordinate,
+                                                 span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+           
+                hasSetRegion = true
             }
-        
         }
+    }
 }

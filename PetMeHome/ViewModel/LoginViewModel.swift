@@ -13,11 +13,13 @@ class LoginViewModel : ObservableObject {
     @Published var code = ""
     @Published var number = ""
     @Published var signedIn = false
+    @Published var loginFail = false
     
     @Published var errorMsg = ""
     @Published var error = false
     @Published var registerUser = false
     @AppStorage("current_status") var status = false
+    private var db = Firestore.firestore();
     
     @Published var isLoading = false
     
@@ -27,24 +29,37 @@ class LoginViewModel : ObservableObject {
     
     func signIn(email: String, password: String){
         Auth.auth().signIn(withEmail: email, password: password){ [weak self] result, error in
-            guard result != nil, error == nil else {
+            if let error = error{
+                self?.errorMsg = error.localizedDescription
+                self?.loginFail = true
                 return
             }
+            
             DispatchQueue.main.async {
+                self?.loginFail = false
                 self?.signedIn = true
             }
         }
     }
     
-    func signUp(email: String, password: String){
+    func signUp(email: String, password: String, firstname: String, lastname: String){
         Auth.auth().createUser(withEmail: email, password: password){ [weak self] result, error in
-            guard result != nil, error == nil else {
-                return
+            if error != nil{
+                print(error!.localizedDescription)
+            }else{
+                self?.db.collection("users").addDocument(data: ["firstname": firstname, "lastname": lastname, "uid": result?.user.uid, "email": email]) { (error) in
+                if error != nil {
+                    print(error?.localizedDescription)
+                }
             }
+                            
+                
             DispatchQueue.main.async {
+                
                 self?.signedIn = true
                 
             }
+        }
         }
     }
     
@@ -53,39 +68,17 @@ class LoginViewModel : ObservableObject {
         self.signedIn = false
     }
     
-    
-    func verify(){
-        isLoading = true
-        Auth.auth().settings?.isAppVerificationDisabledForTesting = true
-        
-        let phoneNumber = "+" + code + number
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (ID, err) in
-            if err != nil {
-                self.errorMsg = err!.localizedDescription
-                self.error.toggle()
-                self.isLoading = false
-                return
-                
-            }
-            
-            alertView(msg: "Enter auth code"){ (code) in
-                let credential = PhoneAuthProvider.provider().credential(withVerificationID: ID!, verificationCode: code)
-                
-                Auth.auth().signIn(with: credential) { (res, err) in
-                    if err != nil {
-                        self.errorMsg = err!.localizedDescription
-                        self.error.toggle()
-                        self.isLoading = false
-                        return
-                        
-                    }
-                    self.checkUser()
-                }
-                
-                
+    func forgotPass(email: String){
+        Auth.auth().sendPasswordReset(withEmail: email){ (error) in
+            if error != nil{
+                print(error!.localizedDescription)
             }
         }
+        
     }
+    
+    
+    
     
     func checkUser(){
         let ref = Firestore.firestore()

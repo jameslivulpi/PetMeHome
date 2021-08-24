@@ -21,17 +21,26 @@ struct petfinderApp: App {
             let viewModel = LoginViewModel()
             SplashView()
                 .environmentObject(viewModel)
+                
+            
+            
         }
+        
     }
 }
 
 class AppDelegate: NSObject,UIApplicationDelegate{
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
                         [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-        FirebaseApp.configure()
-        Firestore.firestore().useEmulator(withHost: "localhost", port: 8091)
+         FirebaseApp.configure()
+        Firestore.firestore().useEmulator(withHost: "localhost", port: 8092)
+
+
+
+    
+
         let settings = Firestore.firestore().settings
-        settings.isPersistenceEnabled = false
+        settings.isPersistenceEnabled = true
         settings.isSSLEnabled = false
         Firestore.firestore().settings = settings
         return true

@@ -6,14 +6,16 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct SignedMenuView: View {
     @EnvironmentObject var loginModel : LoginViewModel
     var body: some View {
-        NavigationView {
+
+                    
         Form{
             Section{
-                NavigationLink(destination: EnterLostPetView()) {
+                NavigationLink(destination: EnterLostPetView(isActive: true)) {
                     Button("Enter a lost pet"){}
                 
                     }
@@ -36,12 +38,13 @@ struct SignedMenuView: View {
                         .padding()
                 })
             }
+           
     
         .animation(.easeIn)
         
         }
     
-        }
+       // }
     }
 }
     

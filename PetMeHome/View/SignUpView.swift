@@ -17,6 +17,8 @@ import FirebaseFirestore
 
 struct SignUpView: View {
     @EnvironmentObject var loginModel : LoginViewModel
+  //  @StateObject var user : UserModel
+    
     
     @State private var first_name = ""
     @State private var last_name = ""
@@ -25,10 +27,18 @@ struct SignUpView: View {
     
         var body: some View {
             NavigationView{
+            
             VStack {
+                Text("Create your new account 👍🏼")
+                               .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
+                               .font(.system(size: 30))
+                               .font(.largeTitle)
+                Spacer()
+                Spacer()
+            
                 HStack{
                     Image(systemName: "person")
-                        TextField("First Name", text: self.$first_name)
+                    TextField("First Name", text: self.$first_name)
                             .padding()
                             .shadow(radius: 10)
                             .cornerRadius(5.0)
@@ -64,7 +74,7 @@ struct SignUpView: View {
                     guard !email.isEmpty, !password.isEmpty else{
                         return
                     }
-                    loginModel.signUp(email: email, password: password)
+                    loginModel.signUp(email: email, password: password, firstname: first_name, lastname: last_name)
     
                     }, label: {
                         Text("Create Account")
@@ -75,13 +85,16 @@ struct SignUpView: View {
                     })
     
                     .padding()
+                Spacer()
             
             }
-            .navigationTitle("Create Account")
+         //   .navigationTitle("Create Account")
                 
             }
-            .padding()
+            //.padding()
         }
+    
+    
         
 }
         

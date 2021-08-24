@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		B9482515C9149301F8DF114E /* Pods_PetMeHomeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941B5D6FEA3D67947CE56CF1 /* Pods_PetMeHomeTests.framework */; };
 		BCAA7C17471176D4109F9122 /* Pods_PetMeHome_PetMeHomeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 514D3AE67200EBEACCCD48D2 /* Pods_PetMeHome_PetMeHomeUITests.framework */; };
+		EB3718A926D182F0007C80CA /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3718A826D182F0007C80CA /* UserModel.swift */; };
+		EB3718AB26D1D3F8007C80CA /* FirebaseImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3718AA26D1D3F8007C80CA /* FirebaseImage.swift */; };
+		EB3718AD26D1D471007C80CA /* Loader.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3718AC26D1D471007C80CA /* Loader.swift */; };
+		EB3718AF26D1E683007C80CA /* UserLocalSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB3718AE26D1E683007C80CA /* UserLocalSettings.swift */; };
+		EB392CFE26CC8A3F00F512BA /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB392CFD26CC8A3F00F512BA /* MenuView.swift */; };
 		EB46C3AB26BB61C900EF91CD /* MainMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46C3AA26BB61C900EF91CD /* MainMenuView.swift */; };
 		EB46C3AE26BC460400EF91CD /* SignedMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46C3AD26BC460400EF91CD /* SignedMenuView.swift */; };
 		EB46C3B026BC4CD700EF91CD /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46C3AF26BC4CD700EF91CD /* MapView.swift */; };
@@ -16,8 +21,11 @@
 		EB46C3B526BCB55400EF91CD /* EnterLostPetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46C3B426BCB55400EF91CD /* EnterLostPetView.swift */; };
 		EB46C3B726BCBEA100EF91CD /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46C3B626BCBEA100EF91CD /* LocationManager.swift */; };
 		EB46C3B926BE1C9100EF91CD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB46C3B826BE1C9100EF91CD /* ImagePicker.swift */; };
+		EB54BEAE26C9B78F0028EB65 /* TabSetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB54BEAD26C9B78F0028EB65 /* TabSetView.swift */; };
+		EB54BEB026C9DD2B0028EB65 /* ResetPassView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB54BEAF26C9DD2B0028EB65 /* ResetPassView.swift */; };
 		EB6AACBD26C1FE2A00A29D3C /* ListPetsDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB6AACBC26C1FE2A00A29D3C /* ListPetsDetailsView.swift */; };
 		EB792F5C26BEF2740043D0C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EB792F5B26BEF2740043D0C1 /* GoogleService-Info.plist */; };
+		EB8B0D6826D2B9FF00053DFF /* WrappedMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B0D6726D2B9FF00053DFF /* WrappedMap.swift */; };
 		EB8B927626BF13C400CC67C4 /* PetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B927526BF13C400CC67C4 /* PetModel.swift */; };
 		EB8B927826BF186600CC67C4 /* Pet.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B927726BF186600CC67C4 /* Pet.swift */; };
 		EB8B927C26BF38F000CC67C4 /* ListPetsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EB8B927B26BF38F000CC67C4 /* ListPetsView.swift */; };
@@ -29,13 +37,10 @@
 		EBBC6CDB26BB1AFA00B7A34E /* PetMeHomeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBBC6CDA26BB1AFA00B7A34E /* PetMeHomeUITests.swift */; };
 		EBBC6CEA26BB1B0900B7A34E /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EBBC6CE926BB1B0900B7A34E /* GoogleSignIn */; };
 		EBC87FF726C0A7890031163B /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC87FF626C0A7890031163B /* LoginViewModel.swift */; };
-		EBC87FF926C0A9150031163B /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC87FF826C0A9150031163B /* AlertView.swift */; };
-		EBC87FFB26C0AC8A0031163B /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC87FFA26C0AC8A0031163B /* Login.swift */; };
 		EBC87FFD26C0AFD10031163B /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC87FFC26C0AFD10031163B /* RegisterViewModel.swift */; };
 		EBC87FFF26C0B3310031163B /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC87FFE26C0B3310031163B /* Register.swift */; };
 		EBC8800126C0B60B0031163B /* UploadImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8800026C0B60B0031163B /* UploadImage.swift */; };
-		EBC8800326C0B8AD0031163B /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8800226C0B8AD0031163B /* UserModel.swift */; };
-		EBC8800726C0BCC10031163B /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8800626C0BCC10031163B /* TabBar.swift */; };
+		EBC8800326C0B8AD0031163B /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8800226C0B8AD0031163B /* User.swift */; };
 		EBC8800926C0CBBD0031163B /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8800826C0CBBD0031163B /* SignInView.swift */; };
 		EBC8800B26C0CDE60031163B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EBC8800A26C0CDE60031163B /* SignUpView.swift */; };
 		F5F369A73F7B1087F10CF455 /* Pods_PetMeHome.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE1140B3B7C0701484CA6FFF /* Pods_PetMeHome.framework */; };
@@ -67,6 +72,11 @@
 		9A37D5EA03136CDFBF88546A /* Pods-PetMeHome.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetMeHome.debug.xcconfig"; path = "Target Support Files/Pods-PetMeHome/Pods-PetMeHome.debug.xcconfig"; sourceTree = "<group>"; };
 		AE1140B3B7C0701484CA6FFF /* Pods_PetMeHome.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PetMeHome.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC604B2B5EC277C1AE71CE9D /* Pods-PetMeHomeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetMeHomeTests.debug.xcconfig"; path = "Target Support Files/Pods-PetMeHomeTests/Pods-PetMeHomeTests.debug.xcconfig"; sourceTree = "<group>"; };
+		EB3718A826D182F0007C80CA /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		EB3718AA26D1D3F8007C80CA /* FirebaseImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseImage.swift; sourceTree = "<group>"; };
+		EB3718AC26D1D471007C80CA /* Loader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loader.swift; sourceTree = "<group>"; };
+		EB3718AE26D1E683007C80CA /* UserLocalSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocalSettings.swift; sourceTree = "<group>"; };
+		EB392CFD26CC8A3F00F512BA /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		EB46C3AA26BB61C900EF91CD /* MainMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuView.swift; sourceTree = "<group>"; };
 		EB46C3AC26BB704F00EF91CD /* petfinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = petfinder.entitlements; sourceTree = "<group>"; };
 		EB46C3AD26BC460400EF91CD /* SignedMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignedMenuView.swift; sourceTree = "<group>"; };
@@ -75,8 +85,11 @@
 		EB46C3B426BCB55400EF91CD /* EnterLostPetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterLostPetView.swift; sourceTree = "<group>"; };
 		EB46C3B626BCBEA100EF91CD /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EB46C3B826BE1C9100EF91CD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		EB54BEAD26C9B78F0028EB65 /* TabSetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabSetView.swift; sourceTree = "<group>"; };
+		EB54BEAF26C9DD2B0028EB65 /* ResetPassView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassView.swift; sourceTree = "<group>"; };
 		EB6AACBC26C1FE2A00A29D3C /* ListPetsDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPetsDetailsView.swift; sourceTree = "<group>"; };
 		EB792F5B26BEF2740043D0C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EB8B0D6726D2B9FF00053DFF /* WrappedMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrappedMap.swift; sourceTree = "<group>"; };
 		EB8B927526BF13C400CC67C4 /* PetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetModel.swift; sourceTree = "<group>"; };
 		EB8B927726BF186600CC67C4 /* Pet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pet.swift; sourceTree = "<group>"; };
 		EB8B927B26BF38F000CC67C4 /* ListPetsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPetsView.swift; sourceTree = "<group>"; };
@@ -93,13 +106,10 @@
 		EBBC6CDA26BB1AFA00B7A34E /* PetMeHomeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetMeHomeUITests.swift; sourceTree = "<group>"; };
 		EBBC6CDC26BB1AFA00B7A34E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EBC87FF626C0A7890031163B /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
-		EBC87FF826C0A9150031163B /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
-		EBC87FFA26C0AC8A0031163B /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		EBC87FFC26C0AFD10031163B /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		EBC87FFE26C0B3310031163B /* Register.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Register.swift; sourceTree = "<group>"; };
 		EBC8800026C0B60B0031163B /* UploadImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImage.swift; sourceTree = "<group>"; };
-		EBC8800226C0B8AD0031163B /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
-		EBC8800626C0BCC10031163B /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
+		EBC8800226C0B8AD0031163B /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		EBC8800826C0CBBD0031163B /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		EBC8800A26C0CDE60031163B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		EEA23DEDDF209AA4BC0CE14E /* Pods-PetMeHome-PetMeHomeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PetMeHome-PetMeHomeUITests.debug.xcconfig"; path = "Target Support Files/Pods-PetMeHome-PetMeHomeUITests/Pods-PetMeHome-PetMeHomeUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -195,6 +205,8 @@
 				EBBC6CC326BB1AFA00B7A34E /* Preview Content */,
 				EB46C3B826BE1C9100EF91CD /* ImagePicker.swift */,
 				EB46C3B626BCBEA100EF91CD /* LocationManager.swift */,
+				EB46C3AF26BC4CD700EF91CD /* MapView.swift */,
+				EB8B0D6726D2B9FF00053DFF /* WrappedMap.swift */,
 			);
 			path = PetMeHome;
 			sourceTree = "<group>";
@@ -229,19 +241,20 @@
 			isa = PBXGroup;
 			children = (
 				EB46C3AD26BC460400EF91CD /* SignedMenuView.swift */,
-				EB46C3AF26BC4CD700EF91CD /* MapView.swift */,
 				EB8B927B26BF38F000CC67C4 /* ListPetsView.swift */,
+				EB3718AA26D1D3F8007C80CA /* FirebaseImage.swift */,
+				EB3718AC26D1D471007C80CA /* Loader.swift */,
 				EBBC6CBF26BB1AF900B7A34E /* SplashView.swift */,
 				EB46C3B426BCB55400EF91CD /* EnterLostPetView.swift */,
 				EB46C3AA26BB61C900EF91CD /* MainMenuView.swift */,
 				EBC8800826C0CBBD0031163B /* SignInView.swift */,
 				EBC8800A26C0CDE60031163B /* SignUpView.swift */,
-				EBC87FF826C0A9150031163B /* AlertView.swift */,
-				EBC87FFA26C0AC8A0031163B /* Login.swift */,
+				EB54BEAF26C9DD2B0028EB65 /* ResetPassView.swift */,
 				EBC87FFE26C0B3310031163B /* Register.swift */,
 				EBC8800026C0B60B0031163B /* UploadImage.swift */,
-				EBC8800626C0BCC10031163B /* TabBar.swift */,
 				EB6AACBC26C1FE2A00A29D3C /* ListPetsDetailsView.swift */,
+				EB54BEAD26C9B78F0028EB65 /* TabSetView.swift */,
+				EB392CFD26CC8A3F00F512BA /* MenuView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,7 +264,8 @@
 			children = (
 				EB8B927726BF186600CC67C4 /* Pet.swift */,
 				EB8B927526BF13C400CC67C4 /* PetModel.swift */,
-				EBC8800226C0B8AD0031163B /* UserModel.swift */,
+				EBC8800226C0B8AD0031163B /* User.swift */,
+				EB3718A826D182F0007C80CA /* UserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -261,6 +275,7 @@
 			children = (
 				EBC87FF626C0A7890031163B /* LoginViewModel.swift */,
 				EBC87FFC26C0AFD10031163B /* RegisterViewModel.swift */,
+				EB3718AE26D1E683007C80CA /* UserLocalSettings.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -546,27 +561,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB46C3AE26BC460400EF91CD /* SignedMenuView.swift in Sources */,
+				EB392CFE26CC8A3F00F512BA /* MenuView.swift in Sources */,
+				EB54BEB026C9DD2B0028EB65 /* ResetPassView.swift in Sources */,
 				EBC87FFD26C0AFD10031163B /* RegisterViewModel.swift in Sources */,
 				EB46C3B026BC4CD700EF91CD /* MapView.swift in Sources */,
+				EB3718AB26D1D3F8007C80CA /* FirebaseImage.swift in Sources */,
 				EBC87FF726C0A7890031163B /* LoginViewModel.swift in Sources */,
+				EB54BEAE26C9B78F0028EB65 /* TabSetView.swift in Sources */,
 				EB46C3B926BE1C9100EF91CD /* ImagePicker.swift in Sources */,
 				EBBC6CC026BB1AF900B7A34E /* SplashView.swift in Sources */,
 				EB8B927626BF13C400CC67C4 /* PetModel.swift in Sources */,
+				EB3718A926D182F0007C80CA /* UserModel.swift in Sources */,
 				EB46C3B726BCBEA100EF91CD /* LocationManager.swift in Sources */,
-				EBC87FFB26C0AC8A0031163B /* Login.swift in Sources */,
 				EB46C3B526BCB55400EF91CD /* EnterLostPetView.swift in Sources */,
 				EBC8800B26C0CDE60031163B /* SignUpView.swift in Sources */,
-				EBC87FF926C0A9150031163B /* AlertView.swift in Sources */,
 				EBBC6CBE26BB1AF900B7A34E /* petfinderApp.swift in Sources */,
+				EB3718AF26D1E683007C80CA /* UserLocalSettings.swift in Sources */,
 				EB8B927C26BF38F000CC67C4 /* ListPetsView.swift in Sources */,
 				EB46C3AB26BB61C900EF91CD /* MainMenuView.swift in Sources */,
 				EBC8800926C0CBBD0031163B /* SignInView.swift in Sources */,
 				EBC8800126C0B60B0031163B /* UploadImage.swift in Sources */,
 				EB6AACBD26C1FE2A00A29D3C /* ListPetsDetailsView.swift in Sources */,
+				EB3718AD26D1D471007C80CA /* Loader.swift in Sources */,
+				EB8B0D6826D2B9FF00053DFF /* WrappedMap.swift in Sources */,
 				EBC87FFF26C0B3310031163B /* Register.swift in Sources */,
-				EBC8800326C0B8AD0031163B /* UserModel.swift in Sources */,
+				EBC8800326C0B8AD0031163B /* User.swift in Sources */,
 				EB8B927826BF186600CC67C4 /* Pet.swift in Sources */,
-				EBC8800726C0BCC10031163B /* TabBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,6 +655,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Apple Development: james.livulpi@me.com (BDJK44TYY2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -697,6 +718,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_ENTITLEMENTS[sdk=*]" = "";
+				CODE_SIGN_IDENTITY = "Apple Development: james.livulpi@me.com (BDJK44TYY2)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -725,7 +747,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = petfinder/petfinder.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PetMeHome/petfinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PetMeHome/Preview Content\"";
@@ -751,7 +773,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = petfinder/petfinder.entitlements;
+				CODE_SIGN_ENTITLEMENTS = PetMeHome/petfinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"PetMeHome/Preview Content\"";

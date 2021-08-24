@@ -17,10 +17,11 @@ struct SignInView: View {
     @State private var email = ""
     @State private var password = ""
     private var db = Firestore.firestore()
+    @State private var showingAlert = false
    
     
         var body: some View {
-            NavigationView{
+           // NavigationView{
                 VStack {
                     Image("mainmenu")
                         .resizable()
@@ -52,7 +53,18 @@ struct SignInView: View {
                         guard !email.isEmpty, !password.isEmpty else{
                             return
                         }
+                        
                         loginModel.signIn(email: email, password: password)
+                        
+                        if loginModel.loginFail == true  {
+                            self.showingAlert=true
+                        }else{
+                            self.showingAlert = false
+                        }
+
+                            
+                            
+    
                         
                     }, label: {
                         Text("Sign In")
@@ -65,6 +77,16 @@ struct SignInView: View {
                             .cornerRadius(15.0)
                             .padding()
                     })
+                    .alert(isPresented: $showingAlert, content: {
+                                    Alert(title: Text("Whoops...").foregroundColor(.red).fontWeight(.heavy), message: Text("Email/Password Combination is Invalid"), dismissButton: .default(Text("OK")))
+                                        
+                   
+                    })
+                    
+    
+                    
+                    NavigationLink("Forgot Password", destination:
+                                  ResetPassView())
                 
                     //.foregroundColor(.white)
                     Spacer()
@@ -85,7 +107,7 @@ struct SignInView: View {
                 
                 
                 
-            }
+         //   }
             //.navigationTitle("Sign In")
 
             

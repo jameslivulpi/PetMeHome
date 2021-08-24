@@ -16,6 +16,9 @@ target 'PetMeHome' do
   pod 'FirebaseUI/Auth'
   pod 'FirebaseUI/Google'
   pod 'FirebaseUI/Phone'
+  pod 'GeoFire/Utils'
+  pod 'Mapbox-iOS-SDK', '~> 5.3.0'
+
   
 
 

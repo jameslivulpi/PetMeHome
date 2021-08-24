@@ -19,7 +19,10 @@ struct MainMenuView: View {
             NavigationView {
                 if loginModel.signedIn{
                     
-                    SignedMenuView()
+                    //SignedMenuView()
+                    
+                    TabSetView()
+                    
                     Button(action: {
                         loginModel.signOut()
                     }, label: {

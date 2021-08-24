@@ -41,6 +41,8 @@ struct SplashView: View {
         VStack(alignment: .center) {
             if self.isActive {
                 MainMenuView()
+                    
+                
             }else{
                 HomeImage()
                     .overlay(ImageOverlay())

@@ -12,7 +12,9 @@ import Foundation
 import MapKit    
 import UIKit
 import FirebaseFirestore
-import Combine 
+import Combine
+import Firebase
+import GeoFire
 
 
 
@@ -25,19 +27,40 @@ struct EnterLostPetView: View {
     @State private var petHaveCollar = ""
     @State private var petLostDate = Date()
     @State private var showingImagePicker = false
+
+ 
+    
     @State private var inputImage: UIImage?
     @State private var image = UIImage()
     @State private var submit = false
+    @State private var userTrackingMode: MapUserTrackingMode = .follow
+    let storageRef = Storage.storage().reference()
     let dateFormatter = DateFormatter()
-    
+    @State var hideAddButton = false
     @StateObject var petModel = PetModel()
-    @StateObject var locationManager = LocationManager()
+    @State var centerCoordinate = CLLocationCoordinate2D()
+    @State var currentLocation: CLLocationCoordinate2D?
+    @State var annotation: MKPointAnnotation?
+    @State var isActive: Bool
+    @State var enteredLocation: CLLocationCoordinate2D?
+    @ObservedObject private var locationManager = LocationManager()
+    @State var curruid = Auth.auth().currentUser?.uid
+   
+
+
+   // @StateObject var locationManager = LocationManager()
+    var homeLocation : [AnnotationItem] {
+         guard let location = locationManager.location?.coordinate else {
+             return []
+         }
+         return [.init(name: "Home", coordinate: location)]
+     }
 
     
     var body: some View {
         
         
-        NavigationView{
+       // NavigationView{
                 
             Form{
                 
@@ -59,19 +82,29 @@ struct EnterLostPetView: View {
                 }
                 
                 Section(header: Text("Select photo")){
+                    if(self.image.size.width == 0){
+                        Image("dog-placeholder")
+                            .resizable()
+                           .scaledToFill()
+                            .frame(height: 320)
+                           .edgesIgnoringSafeArea(.all)
+                    }else{
                     
-                    Image(uiImage: self.image)
-                                   .resizable()
+                        Image(uiImage: self.image)
+                                    .resizable()
                                    .scaledToFill()
-                                   .frame(minWidth: 0, maxWidth: .infinity)
+                                    .frame(height: 320)
                                    .edgesIgnoringSafeArea(.all)
+                    }
                     
                                Button(action: {
+                                withAnimation{
                                    self.showingImagePicker = true
+                                }
                                }) {
                                    HStack {
                                        Image(systemName: "photo")
-                                           .font(.system(size: 20))
+                                        .font(.headline)
                     
                                        Text("Photo library")
                                            .font(.headline)
@@ -82,8 +115,11 @@ struct EnterLostPetView: View {
                                    .cornerRadius(20)
                                    .padding(.horizontal)
                                }
-                               
+                    
+                    
                 }
+              
+            
                 
                 Section(header: Text("When did you pet go Missing?")){
                     DatePicker("Date", selection: self.$petModel.pet.date)
@@ -91,11 +127,23 @@ struct EnterLostPetView: View {
                 }
                 
                 Section{
-                    Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
-                                .frame(width: 300, height: 300)
+                    ZStack {
+                    
+                        MapView(centerCoordinate: $locationManager.region.center, currentLocation: locationManager.region.center)
+                        //Map(coordinateRegion: $locationManager.region, annotationItems: homeLocation) {
+                         //           MapMarker(coordinate: $0.coordinate)
+                       // }
+                    
+                             
+                                  
+                            
+                            }
+                           
+
                 }
                 
-                
+                           .frame(width: 300, height: 300)
+
                 Section{
                     NavigationLink(destination: MainMenuView().navigationBarBackButtonHidden(true).onAppear{
                         self.handleSubmit()
@@ -107,8 +155,10 @@ struct EnterLostPetView: View {
                         
                 }
                 
-                }
-            .navigationBarTitle("Lets Find \(self.petModel.pet.name)")
+            //    }
+           // .navigationBarTitle("Lets Find \(self.petModel.pet.name)")
+           // .navigationBarTitleDisplayMode(.inline)
+
                 
             }
             
@@ -116,21 +166,72 @@ struct EnterLostPetView: View {
     
             .sheet(isPresented: $showingImagePicker) {
                 ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
-            
-        
-        
         }
         
     }
+
     func handleSubmit(){
-        self.petModel.pet.geo = GeoPoint(latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
+        self.petModel.pet.id = "\(UUID())"
+        if let location = currentLocation {
+            enteredLocation = location
+            isActive = false
+        } else if annotation != nil {
+            enteredLocation = centerCoordinate
+            isActive = false
+        }
+        
+        self.petModel.pet.latitude =  locationManager.region.center.latitude
+        self.petModel.pet.longitude = locationManager.region.center.longitude
+        
+        let location = CLLocationCoordinate2D(latitude: self.petModel.pet.latitude , longitude: self.petModel.pet.longitude)
+        self.petModel.pet.hash = GFUtils.geoHash(forLocation: location)
+       
+
+        self.petModel.setPetImage(withImage: self.image, andFileName: "\(curruid!)-\(self.petModel.pet.name).jpg")
+        self.petModel.pet.path = "\(curruid!)-\(self.petModel.pet.name).jpg"
+    
         self.petModel.save()
     
     }
     
 }
-
     
+    
+
+
+
+struct AddButton: View {
+     
+     var parent: EnterLostPetView
+     
+     init(_ parent: EnterLostPetView) {
+         self.parent = parent
+     }
+     
+     var body: some View {
+         VStack {
+             Spacer()
+             HStack {
+                 Spacer()
+                 Button(action: {
+                     let location = MKPointAnnotation()
+                     location.coordinate = parent.centerCoordinate
+                     parent.annotation = location
+                 }) {
+                     Image(systemName: "plus")
+                         .padding()
+                         .background(Color.black.opacity(0.75))
+                         .foregroundColor(.white)
+                         .font(.title)
+                         .clipShape(Circle())
+                         .padding(.trailing)
+                 }
+             }
+         }
+     }
+ }
+
+
 
 
 
@@ -138,6 +239,6 @@ struct EnterLostPetView: View {
 
 struct EnterLostPetView_Previews: PreviewProvider {
     static var previews: some View {
-        EnterLostPetView()
+        EnterLostPetView(isActive: true)
     }
 }

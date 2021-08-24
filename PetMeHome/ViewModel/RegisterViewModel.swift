@@ -8,10 +8,17 @@
 import SwiftUI
 import Firebase
 
+
+struct UserProfile: Codable {
+    var uid: String
+}
+
+
 class RegisterViewModel : ObservableObject{
     @Published var name = ""
     @Published var picker = false
     let ref = Firestore.firestore()
+    
     
     @Published var image_data = Data(count: 0)
     

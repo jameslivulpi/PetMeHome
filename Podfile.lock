@@ -434,6 +434,7 @@ PODS:
     - FirebaseGoogleAuthUI (~> 12.0)
   - FirebaseUI/Phone (12.0.0):
     - FirebasePhoneAuthUI (~> 12.0)
+  - GeoFire/Utils (4.3.0)
   - GoogleAppMeasurement (8.5.0):
     - GoogleAppMeasurement/AdIdSupport (= 8.5.0)
     - GoogleUtilities/AppDelegateSwizzler (~> 7.4)
@@ -503,6 +504,7 @@ PODS:
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.6.1)
   - leveldb-library (1.22.1)
+  - Mapbox-iOS-SDK (5.3.2)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
     - nanopb/encode (= 2.30908.0)
@@ -518,6 +520,8 @@ DEPENDENCIES:
   - FirebaseUI/Auth
   - FirebaseUI/Google
   - FirebaseUI/Phone
+  - GeoFire/Utils
+  - Mapbox-iOS-SDK (~> 5.3.0)
 
 SPEC REPOS:
   trunk:
@@ -537,6 +541,7 @@ SPEC REPOS:
     - FirebasePhoneAuthUI
     - FirebaseStorage
     - FirebaseUI
+    - GeoFire
     - GoogleAppMeasurement
     - GoogleDataTransport
     - GoogleSignIn
@@ -546,6 +551,7 @@ SPEC REPOS:
     - GTMAppAuth
     - GTMSessionFetcher
     - leveldb-library
+    - Mapbox-iOS-SDK
     - nanopb
     - PromisesObjC
 
@@ -566,6 +572,7 @@ SPEC CHECKSUMS:
   FirebasePhoneAuthUI: d84be4a096ddc19f9aace4a6ebcf80fe334f466b
   FirebaseStorage: 2c176ca64a68b45bddc3c7d4d2c0c839927ad92c
   FirebaseUI: f64b6d8f3b8b3adf2b183505999ce568e9550d51
+  GeoFire: c34927b5c81ab614f611c79aa8d074cfa9780f07
   GoogleAppMeasurement: 8d10c1c470fcb0e5143ed74fddd164f0a0384800
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
   GoogleSignIn: 1b0c4ec33a6fe282f4fa35d8ac64263230ddaf36
@@ -575,9 +582,10 @@ SPEC CHECKSUMS:
   GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
   GTMSessionFetcher: 36689134877faeb055b27dfa4ccc9ceaa42e029e
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
+  Mapbox-iOS-SDK: 23c20a5da344234cafba5d13669af3f8bde8beaa
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
 
-PODFILE CHECKSUM: 5f44907840c511d6bcf0afd74c4c144679dcd0e4
+PODFILE CHECKSUM: 1e8d827b4fcca96f95234a67d724a0e11e45dd7e
 
 COCOAPODS: 1.10.2
