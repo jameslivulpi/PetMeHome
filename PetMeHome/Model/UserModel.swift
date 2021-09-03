@@ -7,14 +7,10 @@
 
 import Foundation
 
-
-class UserModel : ObservableObject {
+class UserModel: ObservableObject {
     @Published var user: User
-    
+
     init(user: User = User(id: "", firstname: "", lastname: "", email: "")) {
         self.user = user
-    
     }
-    
-    
 }

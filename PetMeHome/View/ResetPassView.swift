@@ -8,35 +8,30 @@
 import SwiftUI
 
 struct ResetPassView: View {
-    @EnvironmentObject var loginModel : LoginViewModel
+    @EnvironmentObject var loginModel: LoginViewModel
     @State private var email = ""
-    
-    
+
     var body: some View {
-        VStack{
+        VStack {
             Text("Enter your email below to receive password reset instructions")
                 .bold()
                 .font(.caption2)
-            
-                
-        
-        HStack {
-            
-            Image(systemName:  "envelope")
-            TextField("Email", text: self.$email)
-                .padding()
-                .border(Color.blue, width: 2)
-             
-                .shadow(radius: 10)
-                .cornerRadius(5.0)
-                .padding(.bottom, 20)
-                
-        }
-        Button(action: {
-            guard !email.isEmpty else{
-                return
+
+            HStack {
+                Image(systemName: "envelope")
+                TextField("Email", text: self.$email)
+                    .padding()
+                    .border(Color.blue, width: 2)
+
+                    .shadow(radius: 10)
+                    .cornerRadius(5.0)
+                    .padding(.bottom, 20)
             }
-            loginModel.forgotPass(email: self.email)
+            Button(action: {
+                guard !email.isEmpty else {
+                    return
+                }
+                loginModel.forgotPass(email: self.email)
 
             }, label: {
                 Text("Reset Password")
@@ -46,11 +41,8 @@ struct ResetPassView: View {
                     .cornerRadius(19)
                     .background(Color.blue)
             })
-        
         }
         .navigationTitle("Forgot your Password?")
-        
-        
     }
 }
 

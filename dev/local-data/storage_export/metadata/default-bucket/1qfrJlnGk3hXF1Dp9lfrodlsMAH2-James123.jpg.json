@@ -1,0 +1,19 @@
+{
+  "name": "1qfrJlnGk3hXF1Dp9lfrodlsMAH2-James123.jpg",
+  "bucket": "default-bucket",
+  "contentType": "application/octet-stream",
+  "metageneration": 1,
+  "generation": 1629855233238,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "7a8d0f88-2174-44c7-b3b3-eb0e76e97340"
+  ],
+  "timeCreated": "2021-08-25T01:33:53.237Z",
+  "updated": "2021-08-25T01:33:53.237Z",
+  "size": 2606,
+  "md5Hash": "DuyK7fesuZzyJ9IK0VH+YA==",
+  "crc32c": "1143742767"
+}

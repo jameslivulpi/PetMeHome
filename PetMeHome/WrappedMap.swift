@@ -15,6 +15,7 @@ final class WrappedMap: MKMapView {
         gestureRecognizer.minimumPressDuration = 0.8
         addGestureRecognizer(gestureRecognizer)
     }
+
     @objc func handleTap(sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
             let location = sender.location(in: self)
@@ -22,7 +23,9 @@ final class WrappedMap: MKMapView {
             onLongPress(coordinate)
         }
     }
-    required init?(coder: NSCoder) {
+
+    @available(*, unavailable)
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

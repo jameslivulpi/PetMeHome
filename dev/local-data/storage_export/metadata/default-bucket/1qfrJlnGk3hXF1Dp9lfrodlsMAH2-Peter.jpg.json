@@ -1,0 +1,19 @@
+{
+  "name": "1qfrJlnGk3hXF1Dp9lfrodlsMAH2-Peter.jpg",
+  "bucket": "default-bucket",
+  "contentType": "application/octet-stream",
+  "metageneration": 1,
+  "generation": 1629855455019,
+  "storageClass": "STANDARD",
+  "etag": "someETag",
+  "contentDisposition": "inline",
+  "contentEncoding": "identity",
+  "downloadTokens": [
+    "23115b4c-6f72-4447-aa82-625e19e7f557"
+  ],
+  "timeCreated": "2021-08-25T01:37:35.018Z",
+  "updated": "2021-08-25T01:37:35.022Z",
+  "size": 72158,
+  "md5Hash": "eU5w4eFWzWnkGKmr+3bImw==",
+  "crc32c": "2719889438"
+}

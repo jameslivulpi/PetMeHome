@@ -8,10 +8,8 @@
 import Foundation
 
 import Firebase
-import GeoFire
 import FirebaseFirestoreSwift
-
-
+import GeoFire
 
 struct Pet: Identifiable, Codable, Hashable {
     var id: String
@@ -24,7 +22,6 @@ struct Pet: Identifiable, Codable, Hashable {
     var hash: String
     var path: String
 }
-
 
 enum Species: String, CaseIterable {
     case DOG

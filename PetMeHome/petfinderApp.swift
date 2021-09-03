@@ -5,39 +5,32 @@
 //  Created by James Livulpi on 8/4/21.
 //
 
-import SwiftUI
 import Firebase
-import FirebaseFirestore
 import FirebaseAuthUI
+import FirebaseFirestore
+import SwiftUI
 
 @main
 struct petfinderApp: App {
-    
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-    
-    
+
     var body: some Scene {
         WindowGroup {
             let viewModel = LoginViewModel()
             SplashView()
                 .environmentObject(viewModel)
-                
-            
-            
         }
-        
     }
 }
 
-class AppDelegate: NSObject,UIApplicationDelegate{
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions:
-                        [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
-         FirebaseApp.configure()
-        Firestore.firestore().useEmulator(withHost: "localhost", port: 8092)
+class AppDelegate: NSObject, UIApplicationDelegate {
+    func application(_: UIApplication, didFinishLaunchingWithOptions _:
+        [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
+    {
+        FirebaseApp.configure()
+        Firestore.firestore().useEmulator(withHost: "192.168.1.204", port: 8053)
 
-
-
-    
+        Storage.storage().useEmulator(withHost: "192.168.1.204", port: 8094)
 
         let settings = Firestore.firestore().settings
         settings.isPersistenceEnabled = true
@@ -45,7 +38,4 @@ class AppDelegate: NSObject,UIApplicationDelegate{
         Firestore.firestore().settings = settings
         return true
     }
-    
-
 }
-

@@ -5,8 +5,8 @@
 //  Created by James Livulpi on 8/4/21.
 //
 
-import SwiftUI
 import GoogleSignIn
+import SwiftUI
 
 struct ImageOverlay: View {
     var body: some View {
@@ -16,44 +16,35 @@ struct ImageOverlay: View {
                 .padding()
                 .foregroundColor(.white)
                 .padding(.top, -275)
-            
-
-
         }
     }
 }
 
-
 struct HomeImage: View {
-    var body: some View{
+    var body: some View {
         Image("home-alt")
-            .scaleEffect(CGSize(width: 0.33, height: 0.5), anchor: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+            .scaleEffect(CGSize(width: 0.33, height: 0.5), anchor: /*@START_MENU_TOKEN@*/ .center/*@END_MENU_TOKEN@*/)
     }
 }
 
-
 struct SplashView: View {
-    @State var isActive:Bool = false
-   
+    @State var isActive: Bool = false
 
     var body: some View {
-        
         VStack(alignment: .center) {
             if self.isActive {
                 MainMenuView()
-                    
-                
-            }else{
+
+            } else {
                 HomeImage()
                     .overlay(ImageOverlay())
             }
         }
-        .onAppear{
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1){
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 withAnimation {
                     self.isActive = true
                 }
-                    
             }
         }
     }
