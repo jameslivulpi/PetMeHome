@@ -10,6 +10,9 @@ firebase-debug.*.log*
 # Firebase cache
 .firebase/
 
+#localdata
+.dev/
+
 # Firebase config
 Pods*
 
