@@ -146,7 +146,7 @@ class PetModel: ObservableObject {
 
     func setPetImage(withImage: UIImage, andFileName: String) {
         guard let imageData = withImage.jpegData(compressionQuality: 0.0) else { return }
-        let storageRef = Storage.storage(url: "gs://default-bucket/").reference()
+        let storageRef = Storage.storage().reference()
         let thisUserPhotoStorageRef = storageRef.child(andFileName)
         thisUserPhotoStorageRef.putData(imageData, metadata: nil) { metadata, _ in
             guard let metadata = metadata else {

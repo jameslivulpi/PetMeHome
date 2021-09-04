@@ -19,7 +19,7 @@ final class Loader: ObservableObject {
     init(_ id: String) {
         // the path to the image
         let url = "\(id)"
-        let storage = Storage.storage(url: "gs://default-bucket/")
+        let storage = Storage.storage()
         let ref = storage.reference().child(url)
         ref.getData(maxSize: 5 * 1024 * 1024) { data, error in
             if let error = error {

@@ -23,67 +23,45 @@ struct ListPetsView: View {
 
     var body: some View {
         VStack {
+            Text("Lost Pets")
             Section {
                 // ForEach(self.petModel.pets) {pet in
                 Map(coordinateRegion: $locationManager.region, interactionModes: MapInteractionModes.all, annotationItems: self.petModel.annotations) {
                     MapAnnotation(coordinate: $0.coordinate) {
-                        Image(systemName: "person")
+                        Image("dog-face_emoji")
                             .resizable()
                             .scaledToFit()
                             .frame(width: 100, height: 25)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle().stroke(Color.blue, lineWidth: 25 / 10))
-                            .shadow(radius: 10)
                     }
                 }
-                Spacer()
+
                 // }
             }
-            ZStack {
-                ScrollView {
-                    ForEach(self.petModel.pets) { pet in
+            Spacer()
 
-                        // List(petModel.pets) { pet in //loop over all pets in structure
+            VStack {
+                // List{
 
+                // ForEach(petModel.pets) { pet in
+
+                List(petModel.pets) { pet in // loop over all pets in structure
+                    ScrollView {
                         //  let newAnnotation = [location(name: pet.name, coordinate: CLLocationCoordinate2D(latitude: pet.latitude, longitude: pet.longitude))]
-                        Section {
-                            Text(pet.name).font(.title)
 
-                            FirebaseImage(id: pet.path)
+                        Text(pet.name).font(.title)
 
-                            Text(pet.species == 0 ? "Pet Type: Dog" : "Pet Type: Cat")
-                            // .padding()
-                            Text("Pet color: \(pet.color)")
-                            // .padding()
-                            Text("Date Lost: \(pet.date)")
-                            //    .padding()
-                            Section {
-                                // Text("Pet Coordinates last seen:")
-                                Button(action: {
-                                    withAnimation {
-                                        self.showingMap = true
-                                    }
-                                }) {
-                                    HStack {
-                                        Image(systemName: "map")
-                                            .font(.headline)
+                        FirebaseImage(id: pet.path)
 
-                                        Text("Map")
-                                            .font(.headline)
-                                    }
-
-                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 25)
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(20)
-                                    .padding(.horizontal)
-                                }
-                            }
-                        }
+                        Text(pet.species == 0 ? "Pet Type: Dog" : "Pet Type: Cat")
+                        // .padding()
+                        Text("Pet color: \(pet.color)")
+                        // .padding()
+                        Text("Date Lost: \(pet.date)")
+                        //    .padding()
                     }
                 }
             }
+            Spacer()
         }
         .onAppear { petModel.listPets() }
     }

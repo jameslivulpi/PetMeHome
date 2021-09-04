@@ -7,7 +7,7 @@ final class LocationManager: NSObject, ObservableObject {
     @Published var location: CLLocation?
     @Published var region = MKCoordinateRegion(
         center: CLLocationCoordinate2D(latitude: 38.898150, longitude: -77.034340),
-        span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5)
+        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
     )
     private var hasSetRegion = false
 
@@ -32,7 +32,7 @@ extension LocationManager: CLLocationManagerDelegate {
 
             if !hasSetRegion {
                 region = MKCoordinateRegion(center: location.coordinate,
-                                            span: MKCoordinateSpan(latitudeDelta: 0.5, longitudeDelta: 0.5))
+                                            span: MKCoordinateSpan(latitudeDelta: 0.09, longitudeDelta: 0.09))
 
                 hasSetRegion = true
             }

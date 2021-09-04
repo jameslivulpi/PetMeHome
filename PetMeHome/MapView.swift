@@ -12,10 +12,12 @@ struct MapView: UIViewRepresentable {
     var currentLocation: CLLocationCoordinate2D?
     var withAnnotation: MKPointAnnotation?
 
+    var locationManager: LocationManager?
+
     @State private var annotation = MKPointAnnotation()
     @EnvironmentObject var petModel: PetModel
 
-    class Coordinator: NSObject, MKMapViewDelegate {
+    class Coordinator: NSObject, MKMapViewDelegate, ObservableObject {
         var parent: MapView
 
         init(_ parent: MapView) {
@@ -36,6 +38,7 @@ struct MapView: UIViewRepresentable {
                     // let annotation = MKPointAnnotation()
                     // mapView.removeAnnotation(annotation)
                     parent.annotation.coordinate = coordinate
+                    parent.centerCoordinate = coordinate
                     mapView.addAnnotation(parent.annotation)
                 }
             }
@@ -68,7 +71,7 @@ struct MapView: UIViewRepresentable {
         uiView.isScrollEnabled = true
         uiView.isZoomEnabled = true
         let span = MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1)
-        let region = MKCoordinateRegion(center: currentLocation!, span: span)
+        let region = MKCoordinateRegion(center: centerCoordinate, span: span)
 
         uiView.setRegion(region, animated: true)
     }

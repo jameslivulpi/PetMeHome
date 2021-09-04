@@ -31,7 +31,7 @@ struct EnterLostPetView: View {
     let storageRef = Storage.storage().reference()
     let dateFormatter = DateFormatter()
     @State var hideAddButton = false
-    @EnvironmentObject var petModel: PetModel
+    @StateObject var petModel = PetModel()
     @State var centerCoordinate = CLLocationCoordinate2D()
     @State var currentLocation: CLLocationCoordinate2D?
     @State var annotation: MKPointAnnotation?
