@@ -63,7 +63,7 @@ struct ListPetsView: View {
                 }
                 .id(UUID())
             }
-            .onAppear { petModel.listPets() }
+            .onAppear { petModel.geoQuery() }
             Spacer()
         }
 

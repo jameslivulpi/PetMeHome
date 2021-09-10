@@ -67,7 +67,7 @@ class PetModel: ObservableObject {
                 // let newAnnotation = [Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude))]
                 self.annotations.append(Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
 
-                // self.geoQuery()
+                self.geoQuery()
 
                 //  print(Pet(id: id, name: name, color: color, species: species, date: date, latitude: latitude, longitude: longitude, hash: hash, path: path))
                 return (Pet(id: id, name: name, color: color, species: species, date: date, latitude: latitude, longitude: longitude, hash: hash, path: path))
@@ -78,11 +78,12 @@ class PetModel: ObservableObject {
     func geoQuery() {
         // [START fs_geo_query_hashes]
 
-        // Find cities within 50km of London
+        // get location of user
         let center = CLLocationCoordinate2D(latitude: locationManager.region.center.latitude, longitude: locationManager.region.center.longitude)
 
-        // approx miles to meters
-        let radiusInM: Double = userSettings.milesToSearch
+        // convert user setting of how many miles around them to look
+        // miles to meters is 1 miles == 1609.34 meters
+        let radiusInM: Double = userSettings.milesToSearch * 1609.34
 
         // Each item in 'bounds' represents a startAt/endAt pair. We have to issue
         // a separate query for each pair. There can be up to 9 pairs of bounds
@@ -96,7 +97,6 @@ class PetModel: ObservableObject {
                 .end(at: [bound.endValue])
         }
 
-        //  var matchingDocs = [Pet]()
         // Collect all the query results together into a single list
         func getDocumentsCompletion(snapshot: QuerySnapshot?, error: Error?) {
             guard let documents = snapshot?.documents else {
@@ -105,6 +105,7 @@ class PetModel: ObservableObject {
             }
 
             for document in documents {
+                pets.removeAll() // hack to get around issue when changing views duplicates show up
                 let lat = document.data()["latitude"] as? Double ?? 0
                 let lng = document.data()["longitude"] as? Double ?? 0
                 let coordinates = CLLocation(latitude: lat, longitude: lng)
@@ -125,6 +126,8 @@ class PetModel: ObservableObject {
                     let latitude = document.data()["latitude"] as? Double ?? -1.0
                     let longitude = document.data()["longitude"] as? Double ?? -1.0
                     let hash = document.data()["hash"] as? String ?? ""
+                    annotations.append(Location(name: name, coordinate: CLLocationCoordinate2D(latitude: latitude, longitude: longitude)))
+
                     let pet = Pet(id: id, name: name, color: color, species: species, date: date, latitude: latitude, longitude: longitude, hash: hash, path: path)
                     pets.append(pet)
                 }
@@ -136,15 +139,15 @@ class PetModel: ObservableObject {
         for query in queries {
             query.getDocuments(completion: getDocumentsCompletion)
         }
-
-        //  self.pets = pets.map{ queryDocumentSnapshot -> Pet in
-        //  let data = queryDocumentSnapshot.data()
-
-        // self.geoQuery()
-
-        //  print(Pet(id: id, name: name, color: color, species: species, date: date, latitude: latitude, longitude: longitude, hash: hash, path: path))
-        //    return(Pet(id: pet.id, name: pet.name, color: pet.color, species: pet.species, date: pet.date, latitude: pet.latitude, longitude: pet.longitude, hash: pet.hash, path: pet.path))
     }
+
+    //  self.pets = pets.map{ queryDocumentSnapshot -> Pet in
+    //  let data = queryDocumentSnapshot.data()
+
+    // self.geoQuery()
+
+    // print(Pet(id: id, name: name, color: color, species: species, date: date, latitude: latitude, longitude: longitude, hash: hash, path: path))
+    //
 
     func setPetImage(withImage: UIImage, andFileName: String) {
         guard let imageData = withImage.jpegData(compressionQuality: 0.0) else { return }
@@ -157,8 +160,6 @@ class PetModel: ObservableObject {
             }
         }
     }
-
-    func getPetImages() {}
 
     func save() {
         addPet(pet)
