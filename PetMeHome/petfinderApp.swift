@@ -28,9 +28,9 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool
     {
         FirebaseApp.configure()
-        Firestore.firestore().useEmulator(withHost: "192.168.1.204", port: 8053)
+        Firestore.firestore().useEmulator(withHost: "192.168.1.204", port: 8054)
 
-        Storage.storage().useEmulator(withHost: "192.168.1.204", port: 8094)
+        Storage.storage().useEmulator(withHost: "192.168.1.204", port: 8095)
 
         let settings = Firestore.firestore().settings
         settings.isPersistenceEnabled = true

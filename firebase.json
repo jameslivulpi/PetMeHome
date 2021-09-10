@@ -2,14 +2,14 @@
   "emulators": {
     "firestore": {
       "host":"192.168.1.204",
-      "port": 8053
+      "port": 8054
     },
     "ui": {
       "enabled": true
     },
     "storage": {
         "host": "192.168.1.204",
-         "port": 8094
+         "port": 8095
     }
   },
   "storage": {

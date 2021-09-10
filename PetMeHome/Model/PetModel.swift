@@ -29,8 +29,9 @@ class PetModel: ObservableObject {
     var userSettings = UserSettings()
     private var db = Firestore.firestore()
     let uid = Auth.auth().currentUser!.uid
+    let dateformatter = DateFormatter()
 
-    init(pet: Pet = Pet(id: "", name: "", color: "", species: 0, date: Date(), latitude: -1, longitude: -1, hash: "", path: "")) {
+    init(pet: Pet = Pet(id: "", name: "", color: "", species: 0, date: "", latitude: -1, longitude: -1, hash: "", path: "")) {
         self.pet = pet
     }
 
@@ -38,14 +39,14 @@ class PetModel: ObservableObject {
         do {
             print("ADDING \(pet)")
             // let _ = try db.collection("users").document(uid).collection("pets").document(pet.name).setData(from: pet)
-            _ = try db.collection("users").document("\(self.pet.id)").setData(from: pet)
+            _ = try db.collection("pets").document("\(self.pet.id)").setData(from: pet)
         } catch {
             print(error.localizedDescription)
         }
     }
 
     func listPets() {
-        db.collection("users").addSnapshotListener { querySnapshot, _ in
+        db.collection("pets").addSnapshotListener { querySnapshot, _ in
             guard let documents = querySnapshot?.documents else {
                 print("No Pets!")
                 return
@@ -57,7 +58,7 @@ class PetModel: ObservableObject {
                 let name = data["name"] as? String ?? ""
                 let color = data["color"] as? String ?? ""
                 let species = data["species"] as? Int ?? -1
-                let date = data["date"] as? Date ?? Date()
+                let date = data["date"] as? String ?? ""
                 //   let geo = data["geo"] as? GeoPoint ?? GeoPoint(latitude: 1, longitude: 1)
                 let path = data["path"] as? String ?? ""
                 let latitude = data["latitude"] as? Double ?? -1.0
@@ -89,7 +90,7 @@ class PetModel: ObservableObject {
         let queryBounds = GFUtils.queryBounds(forLocation: center,
                                               withRadius: radiusInM)
         let queries = queryBounds.map { bound -> Query in
-            db.collection("users")
+            db.collection("pets")
                 .order(by: "hash")
                 .start(at: [bound.startValue])
                 .end(at: [bound.endValue])
@@ -117,7 +118,8 @@ class PetModel: ObservableObject {
                     let name = document.data()["name"] as? String ?? ""
                     let color = document.data()["color"] as? String ?? ""
                     let species = document.data()["species"] as? Int ?? -1
-                    let date = document.data()["date"] as? Date ?? Date()
+                    let date = document.data()["date"] as? String ?? ""
+
                     //   let geo = data["geo"] as? GeoPoint ?? GeoPoint(latitude: 1, longitude: 1)
                     let path = document.data()["path"] as? String ?? ""
                     let latitude = document.data()["latitude"] as? Double ?? -1.0

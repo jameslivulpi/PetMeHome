@@ -16,7 +16,7 @@ struct Pet: Identifiable, Codable, Hashable {
     var name: String
     var color: String
     var species: Int
-    var date: Date
+    var date: String
     var latitude: Double
     var longitude: Double
     var hash: String

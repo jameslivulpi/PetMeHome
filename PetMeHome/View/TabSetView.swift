@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TabSetView: View {
-    //  @StateObject var petModel = PetModel()
+    @StateObject var petModel = PetModel()
 
     @State private var currentTab = 2
     var body: some View {
@@ -26,6 +26,7 @@ struct TabSetView: View {
                     Image(systemName: "list.dash")
                     Text("List Pets")
                 }
+
                 .tag(0)
 
             EnterLostPetView(isActive: true)

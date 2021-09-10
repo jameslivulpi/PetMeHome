@@ -49,8 +49,6 @@ struct EnterLostPetView: View {
     }
 
     var body: some View {
-        // NavigationView{
-
         Form {
             Section(header: Text("What is your pets name?")) {
                 TextField("Name", text: self.$petModel.pet.name)
@@ -103,15 +101,12 @@ struct EnterLostPetView: View {
             }
 
             Section(header: Text("When did you pet go Missing?")) {
-                DatePicker("Date", selection: self.$petModel.pet.date)
+                DatePicker("Date", selection: $petLostDate)
             }
 
             Section {
                 ZStack {
                     MapView(centerCoordinate: $locationManager.region.center, currentLocation: locationManager.region.center)
-                    // Map(coordinateRegion: $locationManager.region, annotationItems: homeLocation) {
-                    //           MapMarker(coordinate: $0.coordinate)
-                    // }
                 }
             }
 
@@ -125,12 +120,7 @@ struct EnterLostPetView: View {
                     Text("submit")
                 }
             }
-
-            //    }
-            // .navigationBarTitle("Lets Find \(self.petModel.pet.name)")
-            // .navigationBarTitleDisplayMode(.inline)
         }
-
         .sheet(isPresented: $showingImagePicker) {
             ImagePicker(sourceType: .photoLibrary, selectedImage: self.$image)
         }
@@ -154,6 +144,7 @@ struct EnterLostPetView: View {
 
         petModel.setPetImage(withImage: image, andFileName: "\(curruid!)-\(petModel.pet.name).jpg")
         petModel.pet.path = "\(curruid!)-\(petModel.pet.name).jpg"
+        petModel.pet.date = "\(petLostDate)"
 
         petModel.save()
     }

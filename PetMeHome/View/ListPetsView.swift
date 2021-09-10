@@ -15,55 +15,60 @@ struct AnnotationItem: Identifiable {
     let coordinate: CLLocationCoordinate2D
 }
 
+struct childMapView: View {
+    @EnvironmentObject var petModel: PetModel
+    @StateObject var locationManager = LocationManager()
+    var body: some View {
+        Map(coordinateRegion: $locationManager.region, interactionModes: MapInteractionModes.all, annotationItems: self.petModel.annotations) {
+            MapAnnotation(coordinate: $0.coordinate) {
+                Image("dog-face_emoji")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 100, height: 25)
+            }
+        }
+
+        .edgesIgnoringSafeArea(.top)
+    }
+}
+
 struct ListPetsView: View {
-    @StateObject var petModel = PetModel()
+    @ObservedObject var petModel = PetModel()
     @State var annotation = MKPointAnnotation()
     @State private var showingMap = false
-    @StateObject var locationManager = LocationManager()
 
     var body: some View {
-        VStack {
+        VStack(alignment: /*@START_MENU_TOKEN@*/ .center/*@END_MENU_TOKEN@*/, spacing: 5) {
             Text("Lost Pets")
-            Section {
-                // ForEach(self.petModel.pets) {pet in
-                Map(coordinateRegion: $locationManager.region, interactionModes: MapInteractionModes.all, annotationItems: self.petModel.annotations) {
-                    MapAnnotation(coordinate: $0.coordinate) {
-                        Image("dog-face_emoji")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 100, height: 25)
-                    }
-                }
-
-                // }
-            }
+            childMapView().environmentObject(petModel)
             Spacer()
 
-            VStack {
-                // List{
-
-                // ForEach(petModel.pets) { pet in
-
+            VStack(alignment: .leading, spacing: 5) {
                 List(petModel.pets) { pet in // loop over all pets in structure
                     ScrollView {
-                        //  let newAnnotation = [location(name: pet.name, coordinate: CLLocationCoordinate2D(latitude: pet.latitude, longitude: pet.longitude))]
-
-                        Text(pet.name).font(.title)
-
-                        FirebaseImage(id: pet.path)
-
-                        Text(pet.species == 0 ? "Pet Type: Dog" : "Pet Type: Cat")
-                        // .padding()
-                        Text("Pet color: \(pet.color)")
-                        // .padding()
-                        Text("Date Lost: \(pet.date)")
-                        //    .padding()
+                        HStack {
+                            FirebaseImage(id: pet.path)
+                            VStack {
+                                Text(pet.name).font(.title)
+                                    .font(.headline)
+                                Text(pet.species == 0 ? "Pet Type: Dog" : "Pet Type: Cat")
+                                    .font(.footnote)
+                                Text("Pet color: \(pet.color)")
+                                    .font(.footnote)
+                                Text("Date Lost: \(pet.date)")
+                                    .font(.footnote)
+                            }
+                        }
                     }
                 }
+                .id(UUID())
             }
+            .onAppear { petModel.listPets() }
             Spacer()
         }
-        .onAppear { petModel.listPets() }
+
+        .edgesIgnoringSafeArea(.top)
+        .navigationBarTitleDisplayMode(.inline)
     }
 
     private func fetch() {

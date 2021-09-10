@@ -46,9 +46,9 @@ class LoginViewModel: ObservableObject {
             if error != nil {
                 print(error!.localizedDescription)
             } else {
-                self?.db.collection("users").addDocument(data: ["firstname": firstname, "lastname": lastname, "uid": result?.user.uid, "email": email]) { error in
+                self?.db.collection("users").addDocument(data: ["firstname": firstname, "lastname": lastname, "uid": result!.user.uid, "email": email]) { error in
                     if error != nil {
-                        print(error?.localizedDescription)
+                        print(error!.localizedDescription)
                     }
                 }
 
